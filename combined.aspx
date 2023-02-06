@@ -51,6 +51,10 @@
   <h2>Transaction Updater</h2>
   <asp:Fieldset ID="TransactionUpdaterFieldset" runat="server">
     <table>
+	   <tr>
+    <td>Select File:</td>
+    <td><asp:FileUpload ID="FileUpload1" runat="server" /></td>
+	</tr>
       <tr>
         <td>Application CI Code:</td>
         <td>
