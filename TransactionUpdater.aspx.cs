@@ -56,6 +56,20 @@ protected void updateButton_Click(object sender, EventArgs e)
             StreamWriter writer = new StreamWriter(filePath);
             writer.Write(updatedFile);
             writer.Close();
+            
+           /*
+           // Write the updated file as the output
+            byte[] fileBytes = Encoding.UTF8.GetBytes(updatedFile);
+            Response.Clear();
+            Response.ContentType = "application/octet-stream";
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
+            Response.Buffer = true;
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.BinaryWrite(fileBytes);
+            Response.End();
+            Response.Close();
+           
+           */
             lblMessage.Text = "File updated successfully!";
         }
         catch (Exception ex)
