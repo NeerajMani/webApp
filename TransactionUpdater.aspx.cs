@@ -71,6 +71,24 @@ protected void updateButton_Click(object sender, EventArgs e)
            
            */
             lblMessage.Text = "File updated successfully!";
+
+            byte[] fileBytes = Encoding.UTF8.GetBytes(updatedFile);
+            Response.Clear();
+            Response.ContentType = "application/octet-stream";
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
+            Response.Buffer = true;
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.BinaryWrite(fileBytes);
+            Response.End();
+            Response.Close();
+
+// Delete all the files in the folder "E:/LoadRunnerScripts/"
+            DirectoryInfo dir = new DirectoryInfo(@"E:/LoadRunnerScripts/");
+            foreach (FileInfo file in dir.GetFiles())
+            {
+                file.Delete();
+            }
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){window.location.reload(true);}, 1000);", true);
         }
         catch (Exception ex)
         {
