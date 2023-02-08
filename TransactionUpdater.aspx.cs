@@ -76,6 +76,7 @@ protected void updateButton_Click(object sender, EventArgs e)
             Response.Clear();
             Response.ContentType = "application/octet-stream";
             Response.AddHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
+            //Response.TransmitFile(filePath);
             Response.Buffer = true;
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.BinaryWrite(fileBytes);
