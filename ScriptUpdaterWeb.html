@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Script Updater</title>
+</head>
+<body>
+  <label>Select the Script file:</label>
+  <input type="file" id="fileInput">
+  <button onclick="updateScript()">Update Script</button>
+  <script>
+    function updateScript() {
+      const fileInput = document.getElementById("fileInput");
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      console.log("I am inside updateScript function ");
+      reader.onload = function() {
+        const scriptFileName = reader.result;
+        const updatedScript = scriptUpdater(scriptFileName);
+        const updatedFile = new Blob([updatedScript], { type: file.type });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(updatedFile);
+        a.download = file.name;
+        a.click();
+      };
+      reader.readAsText(file);
+    }
+
+    function scriptUpdater(scriptFileName) {
+      console.log("I am inside script Updater function");
+	console.log("Before updateding Script : ", scriptFileName);
+      let transactionName = "";
+      let newValue1 = `,"ID:{PVuserID} | Iteration : {PIterationID} | TimeStamp : {PTimestamp} | Username : {PUsername} | Error at step : `;
+      let updatedScript = "";
+
+      let lines = scriptFileName.split("\n");
+
+      for (let line of lines) {
+        if (line.includes("web_reg_find")) {
+          if (line.includes("Text=")) {
+            let parts = line.split("Text=");
+            let textCheck = parts[1].substring(0, parts[1].indexOf(","));
+            line = `web_reg_find("Text=${textCheck}${newValue1}${transactionName}"",LAST);`;
+          }
+        }
+        if (line.includes("lr_start_transaction")) {
+          let parts = line.split("\"");
+          transactionName = parts[1];
+        }
+        if (line.includes("lr_end_transaction")) {
+          transactionName = "";
+        }
+        updatedScript += line + "\n";
+      }
+
+      return updatedScript;
+    }
+	function TransactionScript() {
+      const fileInput = document.getElementById("inputFile");
+	const appCICodeField = document.getElementById("appCICodeField").value;
+    const scriptNameField = document.getElementById("scriptNameField").value;
+    const funcNameField = document.getElementById("funcNameField").value;
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      console.log("I am inside Transaction Script function ");
+      reader.onload = function() {
+        const scriptFileName = reader.result;
+        const updatedScript = updateFile(scriptFileName, appCICodeField, scriptNameField, funcNameField);
+        const updatedFile = new Blob([updatedScript], { type: file.type });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(updatedFile);
+        a.download = file.name;
+        a.click();
+      };
+      reader.readAsText(file);
+    }
+
+function updateFile(scriptFileName, appCICodeField, scriptNameField, funcNameField) {
+    console.log("I am inside update file function ");
+    let transactionNum = 1;
+	console.log("appCICodeField: ", appCICodeField);
+	console.log("scriptNameField: ", scriptNameField);
+	console.log("funcNameField: ", funcNameField);
+   
+    const lines = scriptFileName.split('\n');
+    let updatedScript = '';
+    for (let line of lines) {
+        if (line.includes('lr_start_transaction')) {
+            const startIndex = line.indexOf('lr_start_transaction') + 21;
+            const endIndex = line.indexOf('"', startIndex + 1);
+            let transactionName = line.substring(startIndex + 1, endIndex);
+            transactionName = `${appCICodeField}_${scriptNameField}_${funcNameField}_${String(transactionNum).padStart(2, '0')}_${transactionName}`;
+            line = line.substring(0, startIndex + 1) + transactionName + line.substring(endIndex);
+            transactionNum++;
+        }
+        if (line.includes('lr_end_transaction')) {
+            const startIndex = line.indexOf('lr_end_transaction') + 19;
+            const endIndex = line.indexOf('"', startIndex + 1);
+            let transactionName = line.substring(startIndex + 1, endIndex);
+	    let endTransactionNum = transactionNum-1;
+            transactionName = `${appCICodeField}_${scriptNameField}_${funcNameField}_${String(endTransactionNum).padStart(2, '0')}_${transactionName}`;
+            line = line.substring(0, startIndex + 1) + transactionName + line.substring(endIndex);
+        }
+        updatedScript += line + '\n';
+    }
+    //console.log("final updatedScript value: ", updatedScript);
+    return updatedScript;
+}
+
+
+  </script>
+	<div>
+      <input type="text" id="appCICodeField" placeholder="Enter App CI Code">
+      <input type="text" id="scriptNameField" placeholder="Enter Script Name">
+      <input type="text" id="funcNameField" placeholder="Enter Function Name">
+      <input type="file" id="inputFile">
+      <button onclick="TransactionScript()">Update File</button>
+    </div>
+</body>
+</html>
