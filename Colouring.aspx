@@ -1,7 +1,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
   <h2>Script Updater</h2>
-  <div style="font-weight: bold; color: #006400;">Description:</div>
-  <p>Information about the Script Updater goes here.</p>
+  <div style="color: lightgreen; font-weight: bold;">
+  Description:
+  <img src="path/to/your/image.jpg" alt="Description Image" />
+  <br />
+  Text description goes here
+</div>
   <div style="font-weight: bold; color: #FF0000;">Pre-requisite:</div>
   <p>Information about the Pre-requisites for the Script Updater goes here.</p>
   <asp:Fieldset ID="ScriptUpdaterFieldset" runat="server">
