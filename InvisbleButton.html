@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Script Updater</title>
+</head>
+<body>
+	<form>
+		<table align="center">
+			<tr>
+				<td>Select script file:</td>
+				<td>
+					<input type="file" id="scriptFileUpload" required />
+					<span id="scriptFileUploadValidator" style="display:none">Please select a script file.</span>
+				</td>
+				<td>
+					<input type="button" id="browseButton" value="Browse" />
+				</td>
+			</tr>
+		</table>
+		<br />
+		<table align="center">
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" id="convertButton" value="Convert" />
+				</td>
+			</tr>
+		</table>
+	</form>
+	<br />
+	<table align="center">
+		<tr>
+			<td><input type="checkbox" id="defaultCheckbox"> Do you want to add default web_reg_find which will verify the HTTP-200 code for all request?</td>
+		</tr>
+	</table>
+	<br />
+	<table align="center" id="actionButton" style="display:none">
+		<tr>
+			<td colspan="2" align="center">
+				<input type="button" id="triggerActionButton" value="Trigger Action" />
+			</td>
+		</tr>
+	</table>
+	<script>
+		document.getElementById("defaultCheckbox").addEventListener("change", function(){
+			if(this.checked){
+				document.getElementById("actionButton").style.display = "block";
+			} else {
+				document.getElementById("actionButton").style.display = "none";
+			}
+		});
+	</script>
+</body>
+</html>
