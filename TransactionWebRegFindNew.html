@@ -25,7 +25,7 @@
       };
       reader.readAsText(file);
     }
-	function webRegFindUpdater(scriptFileName) {
+	function webRegFindUpdaterOld(scriptFileName) {
   const lines = scriptFileName.split('\n');
 
   let transactionName = null;
@@ -54,6 +54,38 @@
   return updatedScript;
 }
 
+	  function webRegFindUpdater(scriptFileName) {
+  let lines = scriptFileName.split("\n");
+  let updatedScript = "";
+  let currentTransaction = "";
+  let insideTransaction = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    if (line.includes("lr_start_transaction")) {
+      currentTransaction = line.split("\"")[1].replace(/['"]+/g, '');
+      insideTransaction = true;
+      updatedScript += line + "\n";
+    } else if (line.includes("lr_end_transaction")) {
+      insideTransaction = false;
+      updatedScript += line + "\n";
+    } else if (insideTransaction) {
+      if (line.includes("web_custom_request") || line.includes("web_url") || line.includes("web_submit_data") || line.includes("web_submit_form")) {
+        updatedScript += 'web_reg_find("Text=200","ID:{PVuserID} | Iteration : {PIterationID} | TimeStamp : {PTimestamp} | Username : {PUsername} | Error at step : ' + currentTransaction + '",LAST);\n';
+      }
+      if (line.includes("web_reg_find") && line.includes("Text=")) {
+        let startIndex = line.indexOf("Text=") + 5;
+        let endIndex = line.indexOf(",LAST");
+        let extractedValue = line.substring(startIndex, endIndex);
+        line = line.replace(extractedValue, extractedValue + ",\"ID:{PVuserID} | Iteration : {PIterationID} | TimeStamp : {PTimestamp} | Username : {PUsername} | Error at step :" + currentTransaction + "\"");
+      }
+      updatedScript += line + "\n";
+    } else {
+      updatedScript += line + "\n";
+    }
+  }
+  return updatedScript;
+}
 
     function scriptUpdater(scriptFileName) {
       console.log("I am inside script Updater function");
