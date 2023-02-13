@@ -24,6 +24,10 @@ web_reg_save_param_json(
 web_convert_param("ids", "SourceEncoding=PLAIN", "TargetEncoding=HTML", LAST);
 idCount = atoi(lr_eval_string("{ids_count}"));
 
+//convert the time to readable format 
+long unixTimestamp = 1676310337;
+lr_save_datetime(unixTimestamp, "%Y-%m-%d %I:%M:%S %p", "convertedDateTime");
+
 // Creating the SDLAccountActivityItems array
 sdlAccountActivityItemsJson = "[";
 for (i = 0; i < idCount; i++) {
@@ -64,9 +68,9 @@ requestJson = "{"
         "\"DirectiveMemoro\": \"xxx\""
     "}"
 "}";
+// log the JSON request for debugging purposes
+lr_log_message(requestJson); 
 
-lr_log_message(requestJson); // Assuming you want to log the JSON request for debugging purposes
-lr_think_time(1); // Assuming you want to add a delay before sending the 2nd API request
 web_custom_request("SecondAPI",
     "URL=second_api_url",
     "Method=POST",
