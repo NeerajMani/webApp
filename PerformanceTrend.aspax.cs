@@ -27,6 +27,13 @@ public partial class PerformanceTrendReport : System.Web.UI.Page
                 ddlApplicationName.Items.Add(new ListItem(dir.Name, dir.Name));
             }
         }
+        if (!IsPostBack)
+        {
+            string projectsPath = Server.MapPath("~/PerformanceResults/Projects");
+            string[] applicationFolders = Directory.GetDirectories(projectsPath);
+            ddlApplications.DataSource = applicationFolders;
+            ddlApplications.DataBind();
+        }
     }
 
     protected void btnGenerateReport_Click(object sender, EventArgs e)
@@ -48,7 +55,8 @@ public partial class PerformanceTrendReport : System.Web.UI.Page
 
         DateTime fromDate = DateTime.Today.AddMonths(-timePeriod).AddDays(1 - DateTime.Today.Day);
         DateTime toDate = DateTime.Today.AddDays(1 - DateTime.Today.Day).AddTicks(-1);
-
+//string applicationPath = Server.MapPath($"~/PerformanceResults/Projects/{application}");
+       
         string folderPath = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["PerformanceResultsPath"]), "Projects", ddlApplicationName.SelectedValue);
 
         List<Dictionary<string, string>> performanceData = new List<Dictionary<string, string>>();
