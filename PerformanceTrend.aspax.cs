@@ -69,6 +69,14 @@ public partial class PerformanceTrendReport : System.Web.UI.Page
                     {
                         HtmlDocument doc = new HtmlDocument();
                         doc.Load(summaryFilePath);
+                        var rows = doc.DocumentNode.SelectNodes("//table[@id='tableid']/tbody/tr");
+foreach (var row in rows)
+{
+    string transactionName = GetInnerText(row.SelectSingleNode("td[1]"));
+    string averageResponseTime = GetInnerText(row.SelectSingleNode("td[2]"));
+    string responseTime90th = GetInnerText(row.SelectSingleNode("td[3]"));
+    // do something with the extracted data
+}
 
                         string transactionName = GetInnerText(doc.DocumentNode.SelectSingleNode("//table/tr[1]/td[1]"));
                         string averageResponseTime = GetInnerText(doc.DocumentNode.SelectSingleNode("//table/tr[2]/td[1]"));
