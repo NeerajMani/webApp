@@ -20,6 +20,7 @@ public partial class PerformanceTrendReport : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             ddlApplicationName.Items.Add(new ListItem("Select Application Name", "0"));
+            //string rootPath = Server.MapPath("~");
             DirectoryInfo dirInfo = new DirectoryInfo(Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["PerformanceResultsPath"]), "Projects"));
             foreach (DirectoryInfo dir in dirInfo.GetDirectories())
             {
@@ -158,13 +159,13 @@ public partial class PerformanceTrendReport : System.Web.UI.Page
 
     private string GetInnerText(HtmlNode node)
     {
-        if (node == null)
-        {
-            return string.Empty;
-        }
-        else
-        {
-            return node.InnerText.Trim();
-        }
+        return node != null ? node.InnerText : string.Empty;
     }
 }
+
+<configuration>
+  <appSettings>
+    <add key="PerformanceResultsPath" value="C:\Results\" />
+  </appSettings>
+</configuration>
+
