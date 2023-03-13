@@ -1,188 +1,135 @@
-Non-functional requirements (NFRs) are the performance characteristics or attributes of a software system that are not related to the system's functional requirements. NFRs are typically related to the system's performance, scalability, reliability, security, and maintainability. In performance testing, NFRs define the performance criteria that the system must meet under specific conditions.
+Set up Harness and Bitbucket
+a. Create an account with Harness (https://app.harness.io/auth/#/signup) and create a new project.
 
-The importance of NFRs in performance testing is significant. Here are some of the reasons why:
+i. Go to the Harness website and create a new account using your email address and a password.
 
-Ensuring the system meets user expectations: NFRs are essential in ensuring that the system meets user expectations in terms of performance, availability, and reliability. By defining and testing NFRs, you can determine whether the system is meeting the desired performance goals and take corrective measures if necessary.
+ii. Once you've created an account, log in to the Harness dashboard and create a new project.
 
-Identifying performance bottlenecks: NFRs can help identify performance bottlenecks in the system. By defining NFRs, you can identify the specific areas of the system that are not meeting the desired performance goals and optimize them to improve the overall performance of the system.
+iii. Follow the instructions provided by Harness to set up the project and configure the required settings.
 
-Establishing performance baselines: NFRs can help establish performance baselines for the system. By defining and testing NFRs, you can establish a baseline for the system's performance and use it as a reference point for future performance testing.
+b. Create an account with Bitbucket (https://bitbucket.org/account/signup/) and create a new repository.
 
-Meeting regulatory and compliance requirements: NFRs can help ensure that the system meets regulatory and compliance requirements related to performance, security, and other non-functional attributes.
+i. Go to the Bitbucket website and create a new account using your email address and a password.
 
-Enhancing user experience: NFRs can help enhance the user experience by ensuring that the system responds quickly and provides a high level of availability and reliability.
+ii. Once you've created an account, log in to the Bitbucket dashboard and create a new repository.
 
-Some examples of NFRs in performance testing include:
+iii. Follow the instructions provided by Bitbucket to set up the repository and configure the required settings.
 
-Response time: The system must respond to user requests within a certain timeframe.
-Throughput: The system must be able to handle a specific number of requests per second or transactions per second.
-Scalability: The system must be able to handle an increased workload as the user base grows.
-Availability: The system must be available for use during specific hours or must have a certain level of uptime.
-Security: The system must be secure and protect against unauthorized access, data breaches, and other security threats.
-Maintainability: The system must be easy to maintain and upgrade over time.
-In summary, NFRs are essential in performance testing as they help define the performance criteria that the system must meet under specific conditions. By defining and testing NFRs, you can ensure that the system meets user expectations, identify performance bottlenecks, establish performance baselines, meet regulatory and compliance requirements, and enhance the user experience.
+c. Connect Harness to Bitbucket by creating a new source provider in Harness and linking it to the Bitbucket repository. You can follow the instructions provided by Harness for this step.
 
------
-There are several criteria to consider when assessing if an application needs performance testing or not. Here are some of the key factors to consider:
+i. In the Harness dashboard, go to the "Source Providers" section and click "Add Source Provider."
 
-Application Type: Performance testing is most critical for applications that are used by a large number of users, handle sensitive data, or have complex workflows. Applications that are mission-critical or have high volumes of transactions also require performance testing.
+ii. Select "Bitbucket" as the source provider and follow the instructions to link it to your Bitbucket repository.
 
-Business Impact: It is essential to consider the impact of poor application performance on the business. If poor performance can lead to a loss of revenue, decreased customer satisfaction, or damage to the brand, then performance testing is crucial.
+iii. Verify that the connection is working correctly by running a test build.
 
-Complexity: Applications with complex workflows, integrations, or customizations are more prone to performance issues, and hence require performance testing.
+Set up LRE
+a. Install LRE on your test environment.
 
-New Releases: New releases of the application, such as software upgrades or feature enhancements, require performance testing to ensure that the new changes do not adversely impact the application's performance.
+i. Download and install the LRE software on your test environment according to the instructions provided by Micro Focus, the vendor of LRE.
 
-Peak Loads: Applications that experience peak loads, such as seasonal or promotional events, require performance testing to ensure that they can handle the increased traffic.
+b. Create a new project in LRE and set up your test environment, scripts, and test data.
 
-Evaluate Risks: Evaluate the risks associated with poor application performance, such as financial, reputational, or compliance risks. Identify the critical areas of the application that require performance testing.
--------------
-Root cause analysis is a critical step in identifying and resolving performance bottlenecks in any application. Here are the steps you can follow to perform a root cause analysis:
+i. In the LRE dashboard, create a new project and configure the project settings, such as the test environment and the test data.
 
-Identify the bottleneck: The first step is to identify the performance bottleneck by analyzing performance metrics such as response time, throughput, and resource utilization. The bottleneck may be in the application code, database, network, or infrastructure.
+ii. Upload your test scripts and configure the required settings, such as the test parameters and the test scenarios.
 
-Gather data: Collect relevant data such as logs, system performance metrics, application performance metrics, and configuration information. This information will help you identify the root cause of the bottleneck.
+c. Configure the LRE plugin for Bitbucket as described earlier.
 
-Analyze the data: Analyze the collected data to identify patterns or anomalies that may be causing the bottleneck. Look for trends in performance metrics, such as spikes or dips in response time, CPU usage, or memory usage. Correlate these trends with the application's behavior or user traffic.
+i. Install and configure the LRE plugin for Bitbucket as described earlier in this chat.
 
-Narrow down the root cause: Once you have identified the trends or anomalies, try to narrow down the root cause of the bottleneck. This may involve reviewing code, database queries, network traffic, or infrastructure components. Use the data you have collected to verify your assumptions and identify the most likely root cause.
+ii. Verify that the plugin is working correctly by testing a script checkout from Bitbucket in LRE.
 
-Develop a hypothesis: Based on the data you have collected and the analysis you have performed, develop a hypothesis about the root cause of the bottleneck. Test your hypothesis by conducting further tests or analysis.
+Set up the pipeline in Harness
+a. In the Harness dashboard, go to the pipeline section and create a new pipeline.
 
-Verify the hypothesis: Verify your hypothesis by conducting tests or analysis that support or refute it. This may involve running tests or simulations, changing configurations, or reviewing code or database queries.
+i. In the Harness dashboard, click "New Pipeline" and select "Performance Test" as the pipeline type.
 
-Fix the root cause: Once you have identified the root cause of the bottleneck, take corrective action to fix it. This may involve changing code, modifying database queries, tuning infrastructure components, or optimizing network configurations.
+ii. Follow the instructions to create the pipeline and configure the required settings.
 
-Monitor and validate: After fixing the root cause, monitor the application's performance to ensure that the bottleneck has been resolved. Validate that the performance metrics have improved, and the application is functioning as expected.
+b. Define the pipeline stages, such as Build, Deploy, and Test.
 
-Document the process: Document the root cause analysis process and the steps taken to resolve the bottleneck. This will help you replicate the process in the future and provide a reference for others who may encounter similar issues.
+i. In the pipeline configuration, define the stages that you want to include in the pipeline.
 
-By following these steps, you can effectively perform root cause analysis for any bottleneck performance issue and resolve it in a timely and efficient manner.
+ii. Typically, a pipeline for performance testing would include stages for Build (to compile the code), Deploy (to deploy the application to the test environment), and Test (to run the performance tests).
 
------------------------------
+c. In the Test stage, add a new test step and select the "Performance Test" type.
 
-Application architecture refers to the structure and organization of an application, including its components, their relationships, and how they interact with each other. A well-designed application architecture is essential for building scalable, maintainable, and reliable software systems. Here are some key concepts and principles related to application architecture:
+i. In the pipeline configuration, add a new step to the Test stage and select "Performance Test" as the step type.
 
-Layered Architecture: Layered architecture is a common design pattern where an application is divided into different layers or tiers, each with a specific responsibility. This approach helps to simplify the design, improve modularity, and make the application more scalable and maintainable. The most common layers in a typical application architecture include presentation layer, application logic layer, and data storage layer.
+ii. Follow the instructions to configure the test step and connect it to your LRE instance.
 
-Microservices Architecture: Microservices architecture is a modern design approach where an application is built as a set of small, independent services that communicate with each other over lightweight protocols. Each service is responsible for a specific functionality or business capability and can be developed, deployed, and scaled independently. Microservices architecture offers many benefits such as increased flexibility, faster time to market, and better fault tolerance.
+d. In the test configuration, select LRE as the test tool and provide the connection details for the LRE instance.
 
-Service-Oriented Architecture (SOA): Service-Oriented Architecture (SOA) is a design approach where an application is built as a collection of loosely coupled services that communicate with each other over a network using standard protocols such as HTTP, SOAP, and REST. SOA allows different applications to work together seamlessly, reduces duplication of functionality, and improves maintainability.
+i. In the test configuration, select LRE as the test tool and provide the connection details for the LRE instance.
 
-Event-Driven Architecture (EDA): Event-driven architecture (EDA) is a design pattern where the application is built around the concept of events, which are generated by different components and consumed by other components. EDA is particularly useful for applications that require real-time processing and responsiveness, such as stock trading systems or sensor networks.
+ii. You may need to provide the URL of the LRE instance, the login credentials, and other required settings.
 
-Domain-Driven Design (DDD): Domain-driven design (DDD) is a design approach that emphasizes the importance of understanding the business domain and modeling it in the software system. DDD promotes the use of ubiquitous language, which is a shared vocabulary between the business domain experts and the development team. DDD helps to create a more maintainable and flexible software system that can adapt to changing business requirements.
+e. Specify the test scenarios to run.
 
-Cloud Native Architecture: Cloud Native Architecture is a design approach where the application is built to run in a cloud environment, using cloud services such as virtual machines, containers, and serverless computing. Cloud Native Architecture offers many benefits such as improved scalability, better fault tolerance, and reduced infrastructure costs.
+i. In the test configuration, specify the test scenarios that you want to run as part of the performance test.
 
-In summary, application architecture is a critical aspect of software development that involves designing and organizing the components of an application to achieve specific goals such as scalability, maintainability, and reliability. There are many different design patterns and approaches to application architecture, each with its own benefits and trade-offs. The choice of architecture depends on the specific requirements and constraints of the application and the business domain it serves.
+ii. You can specify the test scenarios by referencing the scripts that you've uploaded to LRE.
 
+f. Configure the test output settings, such as the report format and destination.
 
-Layered architecture is a design pattern where an application is divided into different layers or tiers, each with a specific responsibility. Typically, there are three layers in a layered architecture: presentation layer, application logic layer, and data storage layer.
+i. In the test configuration, specify the settings for the test output, such as the report format and the destination for the test results.
 
-The presentation layer is responsible for presenting the data to the user and collecting user inputs. It typically includes user interface components such as screens, forms, and menus.
+ii. You can configure Harness to generate reports in various formats, such as HTML, PDF, and JUnit.
 
-The application logic layer contains the business logic of the application. It processes the user inputs and generates the appropriate outputs. This layer is responsible for implementing the use cases and business rules of the application.
+Set up the pipeline trigger in Bitbucket
+a. In the Bitbucket repository, create a new pipeline trigger.
 
-The data storage layer is responsible for managing the data used by the application. It typically includes databases or other data storage systems.
+i. In the Bitbucket repository, click "Settings" and select "Pipelines."
 
-The main advantage of a layered architecture is that it simplifies the design of the application by separating concerns into distinct layers. This makes the application more modular and easier to maintain. It also makes it easier to add new features or modify existing ones without affecting the entire system.
+ii. Click "Create pipeline trigger" and follow the instructions to configure the trigger.
 
-Microservices Architecture:
-Microservices architecture is a modern design approach where an application is built as a set of small, independent services that communicate with each other over lightweight protocols. Each service is responsible for a specific functionality or business capability and can be developed, deployed, and scaled independently.
+b. Configure the trigger to run the pipeline when changes are made to the repository.
 
-Microservices architecture offers many benefits such as increased flexibility, faster time to market, and better fault tolerance. However, it also adds complexity to the design of the application and requires careful management of the communication between the different services.
+i. In the pipeline trigger configuration, specify the events that should trigger the pipeline, such as a push to the repository or a pull request.
 
-Service-Oriented Architecture (SOA):
-Service-Oriented Architecture (SOA) is a design approach where an application is built as a collection of loosely coupled services that communicate with each other over a network using standard protocols such as HTTP, SOAP, and REST.
+ii. You can also specify the branches and paths that should trigger the pipeline.
 
-The services in an SOA application can be developed, deployed, and scaled independently. Each service is responsible for a specific functionality or business capability, and can be reused by other applications or services.
+c. Specify the pipeline to run and the parameters to pass to the pipeline.
 
-SOA allows different applications to work together seamlessly, reduces duplication of functionality, and improves maintainability. However, it can be more complex than a traditional monolithic architecture and requires careful design and management of the services and their interactions.
+i. In the pipeline trigger configuration, specify the pipeline that should run when the trigger is activated.
 
-Event-Driven Architecture (EDA):
-Event-driven architecture (EDA) is a design pattern where the application is built around the concept of events, which are generated by different components and consumed by other components.
+ii. You can also specify the parameters that should be passed to the pipeline, such as the branch and commit ID.
 
-In an EDA, events can be used to trigger actions or initiate processes. This approach is particularly useful for applications that require real-time processing and responsiveness, such as stock trading systems or sensor networks.
+Test the pipeline
+a. Make changes to the code in the Bitbucket repository to trigger the pipeline.
 
-EDA can be more complex than a traditional layered architecture and requires careful design of the event system and the components that generate and consume events.
+i. Modify the code in the Bitbucket repository and commit the changes.
 
-Domain-Driven Design (DDD):
-Domain-driven design (DDD) is a design approach that emphasizes the importance of understanding the business domain and modeling it in the software system.
+ii. Verify that the pipeline trigger is activated and that the pipeline is running.
 
-DDD promotes the use of ubiquitous language, which is a shared vocabulary between the business domain experts and the development team. This helps to ensure that the software system accurately reflects the requirements of the business and that it is more maintainable and flexible.
+b. Monitor the pipeline status and output.
 
-DDD can be used in conjunction with other architectural patterns such as layered architecture or microservices architecture.
+i. In the Harness dashboard, monitor the status of the pipeline and the test output.
 
-Cloud Native Architecture:
-Cloud Native Architecture is designed to take full advantage of the benefits of cloud computing. This architecture focuses on using cloud-based infrastructure services such as virtual machines, containers, and serverless computing to build and run applications.
+ii. If the test fails, analyze the test results to identify the issues and fix the code.
 
-In a cloud-native architecture, applications are designed to be scalable, resilient, and highly available. The architecture promotes the use of microservices, which are small, independent services that communicate with each other using lightweight protocols. These services can be developed, deployed, and scaled independently.
+c. Repeat the process until the pipeline is running successfully.
 
-Cloud Native Architecture also promotes the use of DevOps practices, which focus on automating the deployment and management of applications. This helps to ensure that applications are deployed quickly and reliably, and that they can be easily updated and maintained over time.
+i. Iterate on the pipeline configuration and the test scenarios until the pipeline is running successfully and producing accurate test results.
 
-One of the key benefits of Cloud Native Architecture is that it allows organizations to take advantage of the elasticity and scalability of the cloud. Applications can be easily scaled up or down to meet changing demand, and infrastructure resources can be provisioned dynamically based on the needs of the application.
+ii. Continuously monitor the pipeline and the application performance to identify issues and optimize the performance.
 
-Cloud Native Architecture also promotes the use of containerization technologies such as Docker and Kubernetes. Containers provide a lightweight way to package and deploy applications, making it easier to move applications between development, testing, and production environments.
 
-Overall, Cloud Native Architecture is an important design approach for organizations that are looking to take advantage of the benefits of cloud computing. It helps to ensure that applications are designed for the cloud from the ground up, which can lead to improved performance, scalability, and reliability.
+---To install the LRE plugins for Bitbucket, you will need to follow these general steps:
 
+Go to the Bitbucket marketplace (https://marketplace.atlassian.com/search?query=loadrunner) and search for the "LoadRunner Enterprise" plugin.
 
-----------------------------
-Application monitoring and analysis are critical components of performance engineering. Application monitoring involves the use of tools and techniques to collect data about the performance of an application, while application analysis involves the interpretation and analysis of this data to identify performance issues and opportunities for optimization.
+Once you find the plugin, click on the "Get it now" button to begin the installation process.
 
-Application monitoring can be divided into several different categories, including:
+You will be prompted to log in to your Bitbucket account if you haven't already.
 
-Server monitoring: This involves monitoring the performance of servers on which the application is running, such as CPU utilization, memory usage, and disk I/O.
+Follow the instructions provided to install the plugin. You will need to have the necessary permissions to install plugins for your Bitbucket instance.
 
-Network monitoring: This involves monitoring the performance of the network infrastructure that supports the application, including network latency, packet loss, and bandwidth utilization.
+After installation, the plugin should be visible in the "Add-ons" section of your Bitbucket settings.
 
-Application monitoring: This involves monitoring the performance of the application itself, such as response times, transaction throughput, and error rates.
+In the "Add-ons" section, you will need to configure the plugin by providing the necessary connection details, such as the URL and credentials for your LRE instance.
 
-User monitoring: This involves monitoring the experience of end users, such as page load times, browser rendering times, and user actions.
+Once the plugin is installed and configured, you should be able to connect LRE to your Bitbucket repository.
 
-Application analysis involves using the data collected through monitoring to identify performance issues and opportunities for optimization. This can include analyzing trends over time to identify patterns and correlations, performing root cause analysis to identify the underlying causes of performance issues, and conducting performance testing to validate changes and optimizations.
-
-There are several tools and techniques that can be used for application monitoring and analysis, including:
-
-Application performance monitoring (APM) tools: These are specialized tools that are designed to monitor the performance of applications in real-time, providing detailed metrics and insights into application behavior.
-
-Log analysis tools: These tools are used to analyze log files generated by the application, providing insights into system behavior, errors, and performance issues.
-
-Network performance monitoring (NPM) tools: These tools are used to monitor the performance of the network infrastructure supporting the application, providing insights into network latency, bandwidth utilization, and other network-related issues.
-
-User experience monitoring (UEM) tools: These tools are used to monitor the experience of end-users, providing insights into page load times, user actions, and other user-related performance metrics.
-
-Overall, application monitoring and analysis are critical components of performance engineering, helping to ensure that applications are optimized for maximum performance, reliability, and scalability.
-
------------------
-Dynatrace is a powerful application performance monitoring (APM) tool that provides real-time insights into the performance of applications and infrastructure. When it comes to performance engineering, there are several areas in Dynatrace that can be explored to find performance issues. Some of these areas are:
-
-Transactions and Requests: Dynatrace provides a transaction and request analysis dashboard that helps you identify slow transactions and requests in your application. This allows you to drill down into individual transactions and requests to identify the root cause of performance issues.
-
-Service Dependency Map: Dynatrace Service Dependency Map provides a visual representation of the dependencies between the services in your application. This allows you to identify the services that are causing performance issues and take corrective action.
-
-CPU and Memory Analysis: Dynatrace provides detailed CPU and memory analysis, which allows you to identify the CPU and memory-intensive transactions and requests in your application. This can help you optimize the application code and reduce CPU and memory usage.
-
-Network Analysis: Dynatrace network analysis provides insights into the network traffic and network performance of your application. This allows you to identify network-related performance issues and take corrective action.
-
-User Experience Analysis: Dynatrace user experience analysis provides insights into user behavior and user experience. This allows you to identify performance issues that may be impacting user experience and take corrective action.
-
-Synthetic Monitoring: Dynatrace synthetic monitoring allows you to simulate user interactions with your application to identify performance issues before they impact real users. This allows you to proactively identify and address performance issues.
-
-Code-Level Analysis: Dynatrace code-level analysis allows you to analyze the performance of individual lines of code in your application. This can help you identify and resolve code-level performance issues.
-
----------
-Splunk is a popular log analysis tool that is widely used by performance engineers for analyzing logs and identifying performance issues. Here are some best techniques and approaches that can be used by performance engineers to use Splunk for log analysis:
-
-Define Log Requirements: Before you start using Splunk for log analysis, it is important to define your log requirements. This includes defining which logs to monitor, what data to collect, and what log levels to enable. This will help you to focus your analysis and avoid collecting unnecessary data.
-
-Create Dashboards: Splunk dashboards provide a visual representation of log data that allows you to quickly identify performance issues. Performance engineers can create custom dashboards that display relevant log data and metrics, making it easy to monitor the performance of the application.
-
-Use Filters and Queries: Splunk provides powerful filtering and querying capabilities that allow you to focus on specific log data. Performance engineers can use filters and queries to identify specific log entries related to performance issues, making it easier to identify the root cause of the problem.
-
-Correlate Data: Splunk allows you to correlate data from multiple sources, which can be helpful in identifying performance issues. Performance engineers can correlate log data with performance metrics, user behavior data, and other application data to get a complete picture of the application's performance.
-
-Set Alerts: Splunk allows you to set alerts based on specific log events or conditions. Performance engineers can set alerts to notify them when specific performance thresholds are exceeded or when certain log events occur, making it easier to proactively identify and address performance issues.
-
-Use Machine Learning: Splunk provides machine learning capabilities that can be used to identify performance anomalies and trends. Performance engineers can use these capabilities to identify patterns in the log data that may be contributing to performance issues.
+Please note that the above steps may vary depending on the version of Bitbucket and LRE you are using and the specific plugin you are installing. It's always a good idea to check the documentation provided by the plugin developer for more detailed instructions.
