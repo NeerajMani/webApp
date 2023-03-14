@@ -43,6 +43,7 @@
 				let line = lines[i];
 				for (let varName of varNames) {
 					const regex = new RegExp(varName, 'g');
+					//new RegExp('\\b' + varName + '\\b', 'g')
 					line = line.replace(regex, `C_${varName}`);
 				}
 				updatedScript += line + '\n';
