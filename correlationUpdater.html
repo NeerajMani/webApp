@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Script Updater</title>
+</head>
+<body>
+	<h1>Script Updater</h1>
+	<input type="file" id="script-file">
+	<button onclick="processFile()">Process</button>
+	<script>
+		function processFile() {
+			const fileInput = document.getElementById('script-file');
+			const file = fileInput.files[0];
+			if (!file) {
+				alert('Please select a file');
+				return;
+			}
+			const reader = new FileReader();
+			reader.onload = function(event) {
+				const updatedScript = updateScript(event.target.result);
+				download(updatedScript);
+			};
+			reader.readAsText(file);
+		}
+
+		function updateScript(script) {
+			let lines = script.split('\n');
+			const varNames = [];
+			for (let i = 0; i < lines.length; i++) {
+				const line = lines[i];
+				if (line.includes('web_reg_save_param(')) {
+					const startIndex = line.indexOf('"') + 1;
+					const endIndex = line.indexOf('"', startIndex + 1);
+					const varName = line.substring(startIndex, endIndex);
+					varNames.push(varName);
+				} else if (line.includes('web_reg_save_param_ex(')) {
+					const varName = line.split('ParamName=')[1].split('"')[0];
+      					varNames.push(varName);
+				}
+			}
+			let updatedScript = '';
+			for (let i = 0; i < lines.length; i++) {
+				let line = lines[i];
+				for (let varName of varNames) {
+					const regex = new RegExp(varName, 'g');
+					line = line.replace(regex, `C_${varName}`);
+				}
+				updatedScript += line + '\n';
+			}
+			return updatedScript;
+		}
+
+		function download(text) {
+			const filename = 'updated_script.txt';
+			const element = document.createElement('a');
+			element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+			element.setAttribute('download', filename);
+			element.style.display = 'none';
+			document.body.appendChild(element);
+			element.click();
+			document.body.removeChild(element);
+		}
+	</script>
+</body>
+</html>
