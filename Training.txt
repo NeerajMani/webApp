@@ -1,26 +1,21 @@
 Hello and welcome to this micro training video on non-functional requirements in performance testing. In this video, we'll discuss the importance of non-functional requirements in performance testing, and how to effectively incorporate them into the testing process.
 
-First, let's review what non-functional requirements are. Non-functional requirements are the attributes of a system that define how it should perform. These requirements can include factors such as scalability, reliability, security, usability, and performance. They are essential to ensuring that an application not only functions as expected but also meets the needs and expectations of its users.
+Identify the purpose of the change: Before you can determine if performance testing is required, you must first understand the purpose of the change. For example, is the change being made to fix a performance issue or to introduce new functionality? The purpose of the change will help you understand if performance testing is required and what type of testing should be conducted.
 
-Incorporating non-functional requirements into performance testing is crucial to identify and mitigate any issues that may arise with the system's performance. By doing so, businesses can ensure that their applications can handle the expected loads and usage patterns, minimizing the risk of negative impact on user experience, and avoiding costly downtime.
+Define the scope of the change: Once you understand the purpose of the change, you need to define the scope of the change. This includes understanding what parts of the application are impacted by the change, the expected user load, and the expected workload. Defining the scope of the change will help you determine the level of effort required for performance testing.
 
-Now, let's talk about why non-functional requirements are important in performance testing. Non-functional requirements help ensure that the application is not only functional but also performs well under different scenarios. By testing for these requirements, you can identify potential issues and ensure that the application meets the needs of its users.
+Evaluate the risks: Evaluate the risks associated with the change. For example, does the change involve adding new functionality that may result in increased user traffic? Or does it involve changes to the application's architecture that may impact performance? By evaluating the risks, you can determine if performance testing is necessary and what type of testing is required.
 
-To effectively incorporate non-functional requirements into performance testing, you need to follow a structured process that begins with identifying the relevant requirements. This requires a deep understanding of the business requirements, user expectations, and other factors that may impact the system's performance.
+Consider the timing of the change: Consider the timing of the change and whether there are any upcoming events that may impact user traffic. For example, if the change is being made prior to a major sale or product launch, it may be important to conduct performance testing to ensure that the application can handle the expected user load.
 
-Once the non-functional requirements are identified, performance scenarios need to be defined. These scenarios should represent realistic usage patterns and load levels, and be designed to put the system under stress to ensure that it meets the necessary performance benchmarks.
+Assess the performance history of the application: Review the performance history of the application to determine if there are any trends or patterns that may indicate a need for performance testing. For example, if the application has experienced performance issues in the past following similar changes, it may be necessary to conduct performance testing.
 
-Next, performance tests must be designed to validate the non-functional requirements. These tests may include load testing, stress testing, endurance testing, or other types of performance testing, depending on the requirements identified. The tests should be conducted under various conditions to ensure that the system can handle different usage patterns and load levels.
+Analyze the impact on the end user: Consider the impact that the change may have on the end user. For example, will the change result in slower page load times or longer response times? If so, it may be necessary to conduct performance testing to ensure that the application continues to meet user expectations.
 
-Once the performance tests are completed, the results must be analyzed to determine whether the non-functional requirements have been met. If any issues are found, they should be addressed promptly to ensure that the system meets the necessary performance benchmarks.
+By considering these factors, you can assess whether performance testing is needed for a particular change and determine the appropriate level of testing required. This will help to ensure that the application performs optimally and meets the needs of the end user, even as changes are made over time.
 
-Finally, the results and analysis of the performance tests should be reported to stakeholders, including business leaders and development teams. The report should outline the non-functional requirements tested, the performance scenarios used, and the results of the tests. This information can be used to guide further development and ensure that the application meets the business needs and expectations.
 
-In conclusion, incorporating non-functional requirements into performance testing is essential to ensure that an application functions as expected, meets user expectations, and performs well under different scenarios. By following a structured process, businesses can minimize the risk of negative impact on user experience and avoid costly downtime.
 
-Hello and welcome to this training video on designing scenarios for peak hour testing in LoadRunner Enterprise. In this video, we'll discuss what peak hour testing is, why it's important, and how to effectively design scenarios for this type of testing in LRE.
-
-Peak hour testing is a type of performance testing that simulates high loads during peak usage hours to ensure that an application can handle the expected traffic. It is important to perform peak hour testing because it can help identify and mitigate any issues that may arise when the application is under high load, ensuring that the application performs well even during periods of high usage.
 
 
 Hello and welcome to this training video on designing scenarios for disaster recovery (DR) testing. In this video, we'll discuss what DR testing is, why it's important, and how to effectively design scenarios for this type of testing.
