@@ -53,10 +53,19 @@ async def update_graphs():
             await page.goto(url, {"waitUntil": "networkidle0"})
 
             # Take a screenshot of the graph
-            graph_image_path = await take_screenshot(page)
+            graph_image_path_cpu = await take_screenshot(page)
 
             # Update the Word document with the API name and graph
-            update_word_document(api_name, graph_image_path, word_doc)
+            update_word_document(api_name, graph_image_path_cpu, word_doc)
+
+            url = f"https://www.splunk.com/{api_name}/{domain_name}?start={start_date}&end={end_date}"
+            await page.goto(url, {"waitUntil": "networkidle0"})
+
+            # Take a screenshot of the graph
+            graph_image_path_mem = await take_screenshot(page)
+
+            # Update the Word document with the API name and graph
+            update_word_document(api_name, graph_image_path_mem, word_doc)
 
         # Save and close the Word document
         word_doc.save(word_doc_path)
