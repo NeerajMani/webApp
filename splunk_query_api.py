@@ -197,3 +197,90 @@ def update_word_document(api_name, graph_image, word_doc):
     graph.top = Inches(0.75)
     graph.right = word_doc.page_width - Inches(0.75)
     graph.bottom = word_doc.page_height - Inches(0.75)
+    
+  -------------------------------
+
+from docx.shared import Inches, Pt
+from docx.oxml.ns import nsdecls
+from docx.oxml import parse_xml
+
+# ...
+
+# Function to update the Word document with the graph
+def update_word_document(api_name, graph_image, word_doc):
+    # Add a new section to the Word document
+    section = word_doc.add_section()
+
+    # Set the page size to A4 format (210mm x 297mm)
+    section._sectPr.xpath('./w:pgSz')[0].attrib.clear()
+    section._sectPr.xpath('./w:pgSz')[0].attrib.update({
+        nsdecls('w'): 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
+        'w:w': '11906',
+        'w:h': '16838'
+    })
+
+    # Add the API name as a heading
+    word_doc.add_heading(api_name, level=1)
+
+    # Add the graph image
+    word_doc.add_picture(graph_image, width=Inches(6), height=Inches(4))
+
+# ...
+
+# Run queries and update Word document
+word_doc = docx.Document()
+for api_name in api_names:
+    # ...
+
+    # Take a screenshot of the graph
+    graph_image_path = await take_screenshot(page, api_name)
+
+    # Update the Word document with the API name and graph
+    update_word_document(api_name, graph_image_path, word_doc)
+
+# ...
+
+# Save and close the Word document
+word_doc.save("output.docx")
+
+---------------------------------
+# Function to update the Word document with the graph
+def update_word_document(api_name, additional_text, graph_image, word_doc):
+    # Add a new section to the Word document
+    section = word_doc.add_section()
+
+    # Set the page size to A4 format (210mm x 297mm)
+    section._sectPr.xpath('./w:pgSz')[0].attrib.clear()
+    section._sectPr.xpath('./w:pgSz')[0].attrib.update({
+        nsdecls('w'): 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
+        'w:w': '11906',
+        'w:h': '16838'
+    })
+
+    # Create the heading text by concatenating the API name and additional text
+    heading_text = f"{api_name} {additional_text}"
+
+    # Add the heading to the Word document
+    word_doc.add_heading(heading_text, level=1)
+
+    # Add the graph image
+    word_doc.add_picture(graph_image, width=Inches(6), height=Inches(4))
+
+# ...
+
+# Run queries and update Word document
+word_doc = docx.Document()
+for api_name in api_names:
+    # ...
+
+    # Take a screenshot of the graph
+    graph_image_path = await take_screenshot(page, api_name)
+
+    # Additional text for the heading
+    additional_text = "Max CPU"
+
+    # Update the Word document with the API name, additional text, and graph
+    update_word_document(api_name, additional_text, graph_image_path, word_doc)
+
+# ...
+
